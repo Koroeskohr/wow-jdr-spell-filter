@@ -18,6 +18,23 @@ interface Instantaneous extends Duration {
   kind: "Instantaneous";
 }
 
+interface InRounds extends Duration {
+  kind: "InRounds";
+  rounds: number;
+}
+
+export const SpellDurations = {
+  Instantaneous: { kind: "Instantaneous" } as Instantaneous,
+  minutes: (min: number): InMinutes => ({
+    kind: "InMinutes",
+    duration: min,
+  }),
+  rounds: (rounds: number): InRounds => ({
+    kind: "InRounds",
+    rounds,
+  }),
+};
+
 type CastDuration = "BonusAction" | "Action" | "Reaction" | InMinutes;
 
 export const CastDurations = {
@@ -26,8 +43,8 @@ export const CastDurations = {
   Reaction: "Reaction" as CastDuration,
   minutes: (min: number): InMinutes => ({
     kind: "InMinutes",
-    duration: min
-  })
+    duration: min,
+  }),
 };
 
 interface SpellRange {
@@ -52,8 +69,8 @@ export const SpellRanges = {
   Personal: { kind: "Personal" } as Personal,
   meters: (m: number): InMeters => ({
     kind: "InMeters",
-    distance: m
-  })
+    distance: m,
+  }),
 };
 
 interface SpellComponentBuilder {
@@ -62,13 +79,8 @@ interface SpellComponentBuilder {
   _material: MaterialComponent | false;
   withVerbal(): SpellComponentBuilder;
   withSomatic(): SpellComponentBuilder;
-  withMaterial(
-    m: MaterialComponent
-  ): SpellComponentBuilder;
-  addMaterial(
-    name: string,
-    usedOnCast?: boolean
-  ): SpellComponentBuilder;
+  withMaterial(m: MaterialComponent): SpellComponentBuilder;
+  addMaterial(name: string, usedOnCast?: boolean): SpellComponentBuilder;
 
   build(): SpellComponent;
 }
@@ -97,14 +109,15 @@ const spellComponentBuilder = function (): SpellComponentBuilder {
       return {
         verbal: this._verbal,
         somatic: this._somatic,
-        material: this._material
+        material: this._material,
       };
-    }
+    },
   };
 };
 
 export const SpellComponents = {
-  builder: spellComponentBuilder
+  builder: spellComponentBuilder,
+  none: (): SpellComponent => spellComponentBuilder().build()
 };
 
 type SpellComponent = {
@@ -115,11 +128,11 @@ type SpellComponent = {
 
 export interface Spell {
   name: string;
-  description: string;
+  description?: string;
   level: number;
   unlockLevel: number;
   range: Contact | Personal | InMeters;
   components: SpellComponent;
-  duration: InMinutes | Instantaneous;
+  duration: InMinutes | InRounds | Instantaneous;
   castDuration: CastDuration;
 }

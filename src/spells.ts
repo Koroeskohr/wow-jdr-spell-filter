@@ -1,6 +1,12 @@
-import { CastDurations, Spell, SpellComponents, SpellRanges } from "./Spell";
+import {
+  CastDurations,
+  Spell,
+  SpellComponents,
+  SpellDurations,
+  SpellRanges,
+} from "./Spell";
 
-export const spells: Partial<Spell>[] = [
+export const spells: Spell[] = [
   {
     name: "Rayon de givre",
     castDuration: CastDurations.Action,
@@ -9,20 +15,28 @@ export const spells: Partial<Spell>[] = [
     components: SpellComponents.builder()
       .withVerbal()
       .withSomatic()
-      .addMaterial("water or ice")
-      .build()
+      .addMaterial("eau ou glace")
+      .build(),
+    duration: SpellDurations.Instantaneous,
+    unlockLevel: 1,
   },
   {
     name: "Protection contre les armes",
     castDuration: CastDurations.Action,
     level: 0,
-    range: SpellRanges.Personal
+    range: SpellRanges.Personal,
+    components: SpellComponents.builder().withVerbal().withSomatic().build(),
+    duration: SpellDurations.rounds(1),
+    unlockLevel: 2,
   },
   {
     name: "Projectile magique",
     castDuration: CastDurations.Action,
     level: 1,
-    range: SpellRanges.meters(36)
+    range: SpellRanges.meters(36),
+    components: SpellComponents.builder().withVerbal().withSomatic().build(),
+    duration: SpellDurations.Instantaneous,
+    unlockLevel: 5,
   },
   {
     name: "Armure de mage",
@@ -34,31 +48,38 @@ export const spells: Partial<Spell>[] = [
       .withVerbal()
       .withSomatic()
       .addMaterial("cuir tanné")
-      .build()
+      .build(),
+    unlockLevel: 6,
   },
   {
     name: "Nova de givre",
     castDuration: CastDurations.Action,
     level: 1,
     range: SpellRanges.Personal,
-    components: SpellComponents.builder().withVerbal().withSomatic().build()
+    components: SpellComponents.builder().withVerbal().withSomatic().build(),
+    unlockLevel: 7,
+    duration: SpellDurations.rounds(1),
   },
   {
     name: "Bouclier",
     castDuration: CastDurations.Reaction,
     level: 1,
     range: SpellRanges.Personal,
-    components: SpellComponents.builder().withVerbal().withSomatic().build()
+    components: SpellComponents.builder().withVerbal().withSomatic().build(),
+    unlockLevel: 7,
+    duration: SpellDurations.rounds(1),
   },
   {
     name: "Couteau de glace",
     castDuration: CastDurations.BonusAction,
-    level: 1,
+    level: 8,
     range: SpellRanges.meters(18),
     components: SpellComponents.builder()
       .withSomatic()
-      .addMaterial("water or ice")
-      .build()
+      .addMaterial("eau ou glace")
+      .build(),
+    unlockLevel: 7,
+    duration: SpellDurations.rounds(1),
   },
   {
     name: "Image silencieuse",
@@ -70,14 +91,17 @@ export const spells: Partial<Spell>[] = [
       .withVerbal()
       .withSomatic()
       .addMaterial("laine de mouton")
-      .build()
+      .build(),
+    unlockLevel: 8,
   },
   {
     name: "Transfert",
     castDuration: CastDurations.BonusAction,
     level: 2,
     range: SpellRanges.meters(9),
-    components: SpellComponents.builder().withVerbal().build()
+    components: SpellComponents.builder().withVerbal().build(),
+    duration: SpellDurations.Instantaneous,
+    unlockLevel: 9,
   },
   {
     name: "Image miroir",
@@ -85,14 +109,17 @@ export const spells: Partial<Spell>[] = [
     duration: CastDurations.minutes(1),
     level: 2,
     range: SpellRanges.Personal,
-    components: SpellComponents.builder().withVerbal().withSomatic().build()
+    components: SpellComponents.builder().withVerbal().withSomatic().build(),
+    unlockLevel: 9,
   },
   {
     name: "Flou",
     castDuration: CastDurations.Action,
     level: 2,
     range: SpellRanges.Personal,
-    components: SpellComponents.builder().withVerbal().withSomatic().build()
+    components: SpellComponents.builder().withVerbal().build(),
+    unlockLevel: 10,
+    duration: SpellDurations.minutes(1),
   },
   {
     name: "Chute lente",
@@ -102,8 +129,8 @@ export const spells: Partial<Spell>[] = [
     range: SpellRanges.meters(18),
     components: SpellComponents.builder()
       .withVerbal()
-      .withSomatic()
-      .addMaterial("cuir tanné")
-      .build()
-  }
+      .addMaterial("plume ou duvet")
+      .build(),
+    unlockLevel: 7,
+  },
 ];
