@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/wow-jdr-spells/static/css/main.fc5c2c69.css",
+    "main.js": "/wow-jdr-spells/static/js/main.2726f5cc.js",
+    "index.html": "/wow-jdr-spells/index.html",
+    "main.fc5c2c69.css.map": "/wow-jdr-spells/static/css/main.fc5c2c69.css.map",
+    "main.2726f5cc.js.map": "/wow-jdr-spells/static/js/main.2726f5cc.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fc5c2c69.css",
+    "static/js/main.2726f5cc.js"
+  ]
+}
